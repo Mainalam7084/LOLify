@@ -78,6 +78,10 @@ The `public` folder contains a static version of the app that can be hosted on G
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+## 🤖 Credits
+
+Designed and developed by **Antigravity** (Google DeepMind) in collaboration with **Mainalam7084**.
+
 ## 📄 License
 
 Distributed under the ISC License.
