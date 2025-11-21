@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">
+            <i class="fas fa-laugh-beam" style="color: var(--accent-color);"></i>
+            LOLify
+        </a>
+        
+        <div class="search-bar">
+            <input type="text" placeholder="Search jokes...">
+        </div>
+
+        <div class="user-actions">
+            <% if (user) { %>
+                <span style="color: #fff; font-weight: 600;"><%= user.username %></span>
+                <button class="btn btn-outline" onclick="logout()">Logout</button>
+            <% } else { %>
+                <a href="/login" class="btn btn-outline">Login</a>
+                <a href="/signup" class="btn btn-primary">Sign Up</a>
+            <% } %>
+        </div>
+    </header>
+
+    <script>
+        async function logout() {
+            await fetch('/api/auth/logout', { method: 'POST' });
+            window.location.reload();
+        }
+    </script>

@@ -1,0 +1,42 @@
+<%- include('../partials/header') %>
+    <%- include('../partials/sidebar') %>
+
+        <main class="main-content">
+            <div id="single-joke-container" style="max-width: 600px; margin: 0 auto;">
+                <div id="loader" class="loader"></div>
+            </div>
+        </main>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', async () => {
+                const container = document.getElementById('single-joke-container');
+                const loader = document.getElementById('loader');
+                const jokeId = '<%= jokeId %>';
+
+                try {
+                    // JokeAPI doesn't always support fetching by ID perfectly across all ranges, but let's try the id range endpoint or similar.
+                    // Actually v2 supports /joke/Any?idRange=ID
+                    const res = await fetch(`https://v2.jokeapi.dev/joke/Any?idRange=${jokeId}&blacklistFlags=nsfw,religious,political,racist,sexist,explicit`);
+                    const data = await res.json();
+
+                    loader.style.display = 'none';
+
+                    if (data.error) {
+                        container.innerHTML = '<p>Joke not found.</p>';
+                    } else {
+                        const card = createJokeCard(data);
+                        container.appendChild(card);
+                    }
+                } catch (err) {
+                    loader.style.display = 'none';
+                    container.innerHTML = '<p>Error loading joke.</p>';
+                }
+            });
+
+            // Duplicate createJokeCard or ensure it's available from app.js
+            // I will rely on app.js being included
+        </script>
+        <script src="/js/app.js"></script>
+        </body>
+
+        </html>

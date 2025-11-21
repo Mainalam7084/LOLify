@@ -1,0 +1,60 @@
+<%- include('../partials/header') %>
+    <%- include('../partials/sidebar') %>
+
+        <main class="main-content">
+            <h2 style="margin-bottom: 20px;">Saved Jokes</h2>
+            <div id="saved-grid" class="joke-grid">
+                <!-- Saved Jokes will be injected here -->
+            </div>
+        </main>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', async () => {
+                const grid = document.getElementById('saved-grid');
+
+                const res = await fetch('/api/jokes/saved');
+                if (res.ok) {
+                    const jokes = await res.json();
+                    jokes.forEach(joke => {
+                        const card = createJokeCard(joke);
+                        grid.appendChild(card);
+                    });
+                }
+            });
+
+            // Reuse createJokeCard logic or import it if modularized. 
+            // For simplicity, I'll duplicate the minimal render logic here or ensure app.js handles it if I modify it.
+            // Actually, let's just include app.js but we need to make sure it doesn't auto-fetch the main feed on this page.
+            // I'll add a check in app.js or just inline the renderer here for safety.
+
+            function createJokeCard(joke) {
+                const card = document.createElement('div');
+                card.className = 'joke-card';
+
+                const content = joke.type === 'single'
+                    ? `<div class="joke-text">${joke.joke}</div>`
+                    : `<div class="joke-text">
+                 <div class="joke-setup">${joke.setup}</div>
+                 <div class="joke-delivery">${joke.delivery}</div>
+               </div>`;
+
+                card.innerHTML = `
+            <div class="joke-category">${joke.category}</div>
+            ${content}
+            <div class="card-actions">
+                <button class="action-btn save-btn active-save" onclick="toggleSave(${joke.id}, this)">
+                    <i class="fas fa-bookmark"></i>
+                </button>
+            </div>
+        `;
+                card.jokeData = joke;
+                return card;
+            }
+
+            // Need to ensure toggleSave works here too.
+            // I'll include app.js but prevent it from running the main fetch loop if on /saved.
+        </script>
+        <script src="/js/app.js"></script>
+        </body>
+
+        </html>
