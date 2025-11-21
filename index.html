@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOLify - Static Demo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <a href="#" class="logo">
+            <i class="fas fa-laugh-beam" style="color: var(--accent-color);"></i>
+            LOLify
+        </a>
+        <div class="search-bar">
+            <input type="text" placeholder="Search jokes...">
+        </div>
+        <div class="user-actions">
+            <a href="#" class="btn btn-primary" onclick="alert('Auth requires Node.js backend')">Login</a>
+        </div>
+    </header>
+
+    <nav class="sidebar">
+        <a href="#" class="sidebar-link active category-link" data-category="Any"><i class="fas fa-home"></i> Home</a>
+        <div class="sidebar-section-title">Categories</div>
+        <a href="#" class="sidebar-link category-link" data-category="Programming"><i class="fas fa-code"></i>
+            Programming</a>
+        <a href="#" class="sidebar-link category-link" data-category="Misc"><i class="fas fa-random"></i> Misc</a>
+        <a href="#" class="sidebar-link category-link" data-category="Dark"><i class="fas fa-moon"></i> Dark</a>
+        <a href="#" class="sidebar-link category-link" data-category="Pun"><i class="fas fa-grin-wink"></i> Pun</a>
+        <a href="#" class="sidebar-link category-link" data-category="Spooky"><i class="fas fa-ghost"></i> Spooky</a>
+        <a href="#" class="sidebar-link category-link" data-category="Christmas"><i class="fas fa-sleigh"></i>
+            Christmas</a>
+    </nav>
+
+    <main class="main-content">
+        <div id="joke-grid" class="joke-grid"></div>
+        <div id="loader" class="loader" style="display: none;"></div>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>
